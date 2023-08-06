@@ -74,7 +74,7 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/96a846f5-5bea-4725-bfa6-1bcf55362575)
 
-### How many app is there in each genre?
+### How many apps are there in each genre?
 ```sql
 SELECT prime_genre,
 	COUNT(id) AS NumApps
