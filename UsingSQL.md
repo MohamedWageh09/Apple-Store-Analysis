@@ -142,7 +142,7 @@ Output:
  - App sizes were stored in bytes, 1 mb = 1000000 byte
  - Higher rating for bigger apps, that means users doesn't care about app size
 
-## Average rating for each app genre:
+## High competitive genres:
 ```sql
 SELECT TOP 10 prime_genre, AVG(user_rating) AS AVG_Rating
 FROM AppleStoreApps
@@ -154,7 +154,150 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/fda5c034-2ec3-4e81-b726-e0834075a70d)
 
- - I'll call those genres "the battlefield" as of the high competitive there. 
+ - I'll call those genres "the battlefield" as of the high competitivity there.
+
+## Easy to enter genres (low competitive)
+```sql
+SELECT TOP 10 prime_genre, AVG(user_rating) AS AVG_Rating
+FROM AppleStoreApps
+GROUP BY prime_genre
+ORDER BY 2;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/e0ba15b2-11e8-4b5d-bfba-90d09f08b77f)
+
+- in those genres there is less satisfied means a good opportunity to enter with a good app
+
+
+## Paid apps and Free apps average rating:
+```sql
+SELECT CASE
+	WHEN price > 0 THEN 'Paid'
+	ELSE 'Free'
+	END AS App_Type,
+	AVG(user_rating) AS AVG_Rating
+FROM AppleStoreApps
+GROUP BY CASE
+	WHEN price > 0 THEN 'Paid'
+	ELSE 'Free' END
+ORDER BY AVG_Rating DESC;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/f7d38573-8afb-4459-96a7-0a380338df0d)
+
+## Checking if more languages supported apps have higher average rating or not:
+``` sql
+SELECT CASE
+	WHEN lang#num < 10 THEN 'Less Than 10'
+	WHEN lang#num BETWEEN 10 AND 30 THEN '10 to 30'
+	ELSE 'More Than 30'
+	END AS LanguagesSupported, AVG(user_rating) AS AVG_Rating
+FROM AppleStoreApps
+GROUP BY CASE
+	WHEN lang#num < 10 THEN 'Less Than 10'
+	WHEN lang#num BETWEEN 10 AND 30 THEN '10 to 30'
+	ELSE 'More Than 30'
+	END
+ORDER BY AVG_Rating DESC;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/cd26835e-72e6-446e-aae5-02bbaafda643)
+
+## Does App description length affect the rating?
+```sql
+SELECT CASE
+	WHEN LEN(b.app_desc) < 500 THEN 'Short'
+	WHEN LEN(b.app_desc) BETWEEN 500 AND 1500 THEN 'Medium'
+	ELSE 'Long'
+	END AS Description_Length,
+	AVG(a.user_rating) AS AVG_Rating
+FROM AppleStoreApps a
+JOIN AppleStoreDescription b 
+	ON a.id = b.id
+GROUP BY CASE
+	WHEN LEN(b.app_desc) < 500 THEN 'Short'
+	WHEN LEN(b.app_desc) BETWEEN 500 AND 1500 THEN 'Medium'
+	ELSE 'Long'
+	END
+ORDER BY AVG_Rating DESC;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/2ee85773-8b82-4cd7-9931-739c2be471b4)
+
+- People prefer apps with a full good description
+
+## Top rated app for each genre:
+```sql
+SELECT track_name,
+	prime_genre,
+	user_rating
+FROM
+	(SELECT track_name,
+		prime_genre,
+		user_rating,
+		RANK() OVER(PARTITION BY prime_genre ORDER BY user_rating DESC, rating_count_tot DESC) as rank
+	FROM AppleStoreApps) a
+WHERE rank = 1;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/2207bbf8-5b2d-439d-9189-89cdb16fad89)
+
+## Average price for each genre and number of times sold
+```sql
+SELECT prime_genre,
+	AVG(price) as AVG_Price,
+	COUNT(rating_count_tot) #_sold
+FROM AppleStoreApps
+WHERE price != 0
+GROUP BY prime_genre
+ORDER BY AVG_Price DESC;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/e43ffb91-c0bc-4a27-bfae-9aed0f243915)
+
+
+## How does top Apps in each genre look like?
+```sql
+SELECT track_name AS top_product, prime_genre, user_rating, price AS price_of_top_product, ROUND(avg_price, 2) AS avg_price_in_genre
+FROM (
+    SELECT
+        track_name,
+        prime_genre,
+        user_rating,
+        price,
+        RANK() OVER (PARTITION BY prime_genre ORDER BY user_rating DESC, price DESC, rating_count_tot DESC) AS rank,
+        AVG(price) OVER (PARTITION BY prime_genre) AS avg_price
+    FROM AppleStoreApps
+) a
+WHERE rank = 1 AND price != 0;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/da0f1cf0-13fe-4c8e-b586-a7d493d4af7d)
+
+# Recommendations:
+
+1) Choose a low competitivity genre where people are unsatisfied with the current apps such as Catalogs, Finance, LifeStyle Or News.
+2) Don't add many languages to the app as it doesn't affect the rating, put that effort in another part.
+3) Take a look at the top rated app for each genre and see how can you provide something different / add a new idea.
+4) Application description is VERY important and people likes apps that has a full description for it's features/services
+5) Don't care about the application size as long as it will provide a good
+6) You can make paid app (if you provode a high quality and value app) and list a good price depending on the genre that i listed on the insights.
+7) 
+
 
 
 
