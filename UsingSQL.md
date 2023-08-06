@@ -32,7 +32,7 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/991d7bf1-9648-4208-9fc7-b7bef6123d4f)
 
-### Checking is there are null missing values in both files:
+### Checking if there are missing values in both files:
 ``` sql
 -- Checking Nulls in Apps
 SELECT COUNT(*) AS MissingValues
