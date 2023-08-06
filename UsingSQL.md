@@ -326,7 +326,7 @@ Output:
 3) Take a look at the top rated app for each genre and see how can you provide something different / add a new idea.
 4) Application description is VERY important and people likes apps that has a full description for it's features/services.
 5) Application size isn't a big deal as long as you are providing a good app.
-6) You can make paid app (if you provide a high quality and value app) and list a good price depending on the genre that i listed on the insights.
+6) You can make paid app (if you provide a high quality and value app) then list a good price depending on the genre that i listed on the insights.
 7) Provide 3 to 5 screenshots in the application description.
 
 
