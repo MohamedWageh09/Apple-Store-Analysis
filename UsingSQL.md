@@ -113,6 +113,16 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/12b5650c-95cc-4ce1-8f2a-e52c0cda661d)
 
+### Minimun and Maximum number of screenshots
+```sql
+SELECT MIN(ipadSc_urls#num) as Min_Screenshots, MAX(ipadSc_urls#num) as Max_Screenshots
+FROM AppleStoreApps;
+```
+Ourput:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/c09ced0c-282a-49de-b193-ebf1b5315c83)
+
+
 EDA ends here, Now it's time for the insights
 
 # 2) Insights
@@ -288,15 +298,36 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/da0f1cf0-13fe-4c8e-b586-a7d493d4af7d)
 
+
+## Does people like more screenshots?
+```sql
+SELECT CASE
+	WHEN ipadSc_urls#num <= 3 THEN '1 to 3 screenshots'
+	ELSE '3 to 5'
+	END AS #_of_screenshots,
+	AVG(user_rating) AS AVG_Rating
+FROM AppleStoreApps
+	GROUP BY CASE
+		WHEN ipadSc_urls#num <= 3 THEN '1 to 3 screenshots'
+		ELSE '3 to 5'
+		END
+	ORDER BY AVG_Rating DESC;
+```
+
+Output:
+
+![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/a8d4f23a-28e3-4a9e-acd9-ca755a2ef085)
+
+
 # Recommendations:
 
 1) Choose a low competitivity genre where people are unsatisfied with the current apps such as Catalogs, Finance, LifeStyle Or News.
 2) Don't add many languages to the app as it doesn't affect the rating, put that effort in another part.
 3) Take a look at the top rated app for each genre and see how can you provide something different / add a new idea.
-4) Application description is VERY important and people likes apps that has a full description for it's features/services
-5) Don't care about the application size as long as it will provide a good
-6) You can make paid app (if you provode a high quality and value app) and list a good price depending on the genre that i listed on the insights.
-7) 
+4) Application description is VERY important and people likes apps that has a full description for it's features/services.
+5) Application size isn't a big deal as long as you are providing a good app.
+6) You can make paid app (if you provide a high quality and value app) and list a good price depending on the genre that i listed on the insights.
+7) Provide 3 to 5 screenshots in the application description.
 
 
 
