@@ -153,7 +153,7 @@ Output:
  - App sizes were stored in bytes, 1 mb = 1000000 byte
  - Higher rating for bigger apps, that means users doesn't care about app size
 
-## High competitive genres:
+## High competitivity genres:
 ```sql
 SELECT TOP 10 prime_genre, AVG(user_rating) AS AVG_Rating
 FROM AppleStoreApps
