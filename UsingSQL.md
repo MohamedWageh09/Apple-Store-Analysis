@@ -3,7 +3,7 @@ Hello people!
 Here i'll be providing the analysis process, insights and recommendiations for people that are planning to add a new App on Apple Store.
 The Dataset contains 2 files, one for the App data and the second one is for App description and you can find it on Kaggle:
 https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps?resource=download&select=AppleStore.csv
-## Dashboard: https://www.novypro.com/project/apple-app-store-analysis-power-bi
+### Dashboard: https://www.novypro.com/project/apple-app-store-analysis-power-bi
   - EDA Analysis
   - Insights
   - Recommendations
