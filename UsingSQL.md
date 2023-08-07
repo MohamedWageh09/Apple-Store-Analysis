@@ -167,7 +167,7 @@ Output:
 
  - I'll call those genres "the battlefield" as of the high competitivity there.
 
-## Easy to enter genres (low competitive)
+## Easy to enter genres (low competitivity)
 ```sql
 SELECT TOP 10 prime_genre, AVG(user_rating) AS AVG_Rating
 FROM AppleStoreApps
@@ -179,7 +179,7 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/e0ba15b2-11e8-4b5d-bfba-90d09f08b77f)
 
-- in those genres there is less satisfied means a good opportunity to enter with a good app
+- in those genres users are less satisfied which means there is a good opportunity to enter with a good app!
 
 
 ## Paid apps and Free apps average rating:
@@ -220,7 +220,7 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/cd26835e-72e6-446e-aae5-02bbaafda643)
 
-## Does App description length affect the rating?
+## Does app description length affect the rating?
 ```sql
 SELECT CASE
 	WHEN LEN(b.app_desc) < 500 THEN 'Short'
@@ -320,7 +320,7 @@ Output:
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/a8d4f23a-28e3-4a9e-acd9-ca755a2ef085)
 
 
-# Recommendations:
+# 3) Recommendations if you are going to make an IOS app:
 
 1) Choose a low competitivity genre where people are unsatisfied with the current apps such as Catalogs, Finance, LifeStyle Or News.
 2) Don't add many languages to the app as it doesn't affect the rating, put that effort in another part.
