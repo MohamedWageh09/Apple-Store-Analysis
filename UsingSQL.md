@@ -9,7 +9,7 @@ https://www.kaggle.com/datasets/ramamet4/app-store-apple-data-set-10k-apps?resou
   - Recommendations
 
  ## 1) EDA Analysis
- ### First let's check if the data has duplicates in both files
+ ### First let's check if the data has duplicates in both files:
  ``` sql
 SELECT COUNT(DISTINCT id) AS UniqueApps
 FROM AppleStoreApps;
@@ -23,7 +23,7 @@ Output:
 
   - No duplicates, great :D 
 
-### Taking a look at overall user ratings
+### Taking a look at overall user ratings:
 ``` sql
 SELECT MIN(user_rating) AS Min, AVG(user_rating) AS AVG, MAX(user_rating) AS Max
 FROM AppleStoreApps;
@@ -114,7 +114,7 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/12b5650c-95cc-4ce1-8f2a-e52c0cda661d)
 
-### Minimun and Maximum number of screenshots
+### Minimun and Maximum number of screenshots:
 ```sql
 SELECT MIN(ipadSc_urls#num) as Min_Screenshots, MAX(ipadSc_urls#num) as Max_Screenshots
 FROM AppleStoreApps;
@@ -128,7 +128,7 @@ EDA ends here, Now it's time for the insights
 
 # 2) Insights
 
-## Users rating per app size
+## Users rating per app size:
 ```sql
 SELECT
     CASE WHEN size_bytes / 1000000 <= 1024 THEN '1 gb or less'
@@ -167,7 +167,7 @@ Output:
 
  - I'll call those genres "the battlefield" as of the high competitivity there.
 
-## Easy to enter genres (low competitivity)
+## Easy to enter genres (low competitivity):
 ```sql
 SELECT TOP 10 prime_genre, AVG(user_rating) AS AVG_Rating
 FROM AppleStoreApps
@@ -263,7 +263,7 @@ Output:
 
 ![image](https://github.com/MohamedWageh09/Apple-Store-Analysis/assets/120044385/2207bbf8-5b2d-439d-9189-89cdb16fad89)
 
-## Average price for each genre and number of times sold
+## Average price for each genre and number of times sold:
 ```sql
 SELECT prime_genre,
 	AVG(price) as AVG_Price,
